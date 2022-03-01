@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixação 5</title>
+</head>
+<body>
+    <script>
+        console.log('------------------fixação 2------------------')
+
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let arrpar = []; 
+        console.log(arr);
+        function par(array) {
+            if ((array.length) != 0) {
+                if (array[0] % 2 == 0) {
+                    arrpar.push(array[0]);
+                    array.shift();
+                } else {
+                    array.shift();
+                }
+                par(array);
+            }
+            return;
+        }
+        
+        par(arr);
+        console.log(arrpar);
+
+
+        console.log('------------------fixação 2------------------');
+
+        const fibo = (f) => {
+            if (f === 0 || f === 1){
+                return 1;
+            }
+            return fibo(f - 1) + fibo(f - 2);
+        }
+        let numero = parseFloat(prompt('Função Fibonacci.'))
+        console.log(' Resultado da Fibonacci: ' + fibo(numero));
+
+        console.log('------------------fixação 3------------------')
+
+        const pokemons = [
+            { 
+                Nome : "Pikachu",
+                Tamanho : "Pequeno",
+                Evolução : "Raichu",
+                Involução : "Pichu",
+                Level : 20
+            }, {
+                Nome : "Charmeleon",
+                Tamanho : "Médio",
+                Evolução : "Charizard",
+                Involução : "Charmander",
+                Level : 22
+            }, {
+                Nome : "Ivyssauro",
+                Tamanho : "Pequeno",
+                Evolução : "Venussauro",
+                Involução : "Bulbassauro",
+                Level : 19
+            }, {
+                Nome : "Wartortle",
+                Tamanho : "Médio",
+                Evolução : "Blastoise",
+                Involução : "Squirtle",
+                Level : 27
+            }, {
+                Nome : "Dugtrio",
+                Tamanho : "Pequeno",
+                Evolução : "Maximo",
+                Involução : "Digglet",
+                Level : 38
+            }
+        ]
+        
+        console.log('Objeto original')
+        for (let i = 0; i < pokemons.length; i++) {
+            console.log(pokemons[i]);
+        }
+        
+        const arrayLeveisMenores = pokemons.filter (obj => obj.Level < 25);
+        const quantidadePokemon = arrayLeveisMenores.length;
+        console.log('Filter para selecionar os pokemons de Level baixo.')
+
+        const levelTotal = pokemons.reduce((pvalue, cvalue, cindex, arrayObjs) => {
+            return pvalue + cvalue.Level;
+        }, 0)
+        const novoLevel = (levelTotal / quantidadePokemon);
+        console.log('Reduce soma o Level dos pokemons, e junto do Filter é usado para pegar a média')
+
+        const pokemonEvoluido = pokemons.map ((obj, index, arrayObjs) => {
+            if (obj.Level < 25) {
+                obj.Level = novoLevel;
+            }
+            
+            if (obj.Level >= 40 && obj.Evolução !== "Maximo") {
+                obj.Involução = obj.Nome
+                obj.Nome = obj.Evolução
+                obj.Evolução = "Maximo"	
+                if (obj.Tamanho === "Médio") {
+                    obj.Tamanho = "Grande";
+                } else if (obj.Tamanho == "Pequeno") {
+                    obj.Tamanho = "Médio";
+                }
+            }
+            return obj.Nome;
+        })
+
+        console.log('Map adiciona essa media Level aos pokemons com level menor a 25 modificando o objeto e verifica as evoluções, tamanho, e nomes dos pokemons.');
+        console.log(pokemons);
+        
+        
+
+    </script>
+</body>
+</html>
